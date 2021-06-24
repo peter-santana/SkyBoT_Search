@@ -7,8 +7,9 @@ import time
 from datetime import datetime, date, time, timedelta
 import pandas as pd
 from astropy.io.votable import parse
-from astropy.io.votable import parse_single_table
+from astropy.io.votable import parse_single_table, is_votable, validate
 import xml.etree.ElementTree as ET
+import numpy as np
 
 
 
@@ -67,16 +68,16 @@ import xml.etree.ElementTree as ET
 
 # file.close()
 
-
+final_data = np.array([[1,2,3,4,5,6,7,8,9,10,11]])
 
 
 
 file = open("resp_text.txt", "w")
 
 
-TALL = 20
+TALL = 20 * 3600
 
-WIDE = 24
+WIDE = 24 * 3600
 
 #Include path and name of the excel file
 file_name = "J2000 Coordinates - LCAM Center FOV Visibility Sheet.xlsx"
@@ -86,7 +87,7 @@ df =  pd.read_excel(io=file_name)
 i = 1
 
 #Loop through all the excel file
-while i <= 10:
+while i <= 3:
 
 	#Grab date from excel file
 	date = datetime.strptime(df["DateandTime"][i], "%y:%m:%dT%H:%M:%S")
@@ -99,7 +100,7 @@ while i <= 10:
 
 
 	#Load the parameters for the search query
-	ploads = {"-ep":date.isoformat(), "-ra":RA, "-dec":DEC,"-mime":"text","-radius":str(TALL)+"x"+str(WIDE)}
+	ploads = {"-ep":date.isoformat(), "-ra":RA, "-dec":DEC,"-mime":"text","-radius":str(TALL)+"x"+str(WIDE),"-objFilter":"100","-output":"object"}
 
 
 	#TEXT request for query, will write in a seperate text file all the objects
@@ -110,10 +111,10 @@ while i <= 10:
 	file.write("\n")
 
 	#Same parameters but for the votable format(The one that lets you turn into array)
-	ploads = {"-ep":date.isoformat(), "-ra":RA, "-dec":DEC,"-mime":"votable","-radius":str(TALL)+"x"+str(WIDE)}
+	ploads_vot = {"-ep":date.isoformat(), "-ra":RA, "-dec":DEC,"-mime":"votable","-radius":str(TALL)+"x"+str(WIDE),"-objFilter":"100","-output":"object"}
 
 	#Same request but for VOTABLES
-	receive_votables = requests.get("http://vo.imcce.fr/webservices/skybot/skybotconesearch_query.php?",params=ploads)
+	receive_votables = requests.get("http://vo.imcce.fr/webservices/skybot/skybotconesearch_query.php?",params=ploads_vot)
 
 
 	#Turning into xml so parse from astropy can parse the data (idk why it works like that but it does lmao)
@@ -126,26 +127,47 @@ while i <= 10:
 
 	votable = parse("file.xml")
 
-	#TODO:
-	#get the first table (will change this after bc I intend to get all, Testing rn)
-	table = votable.get_first_table()
 
-	#Turn data into an array
-	data = table.array
 
-	#Testing this lmao
-	print(data)
+
+	#Loop to get the tables and the data
+	for resource in votable.resources:
+
+
+
+
+		for table in resource.tables:
+			tmp = table.array
+			almost_final = np.array([[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]])
+
+			for table_lists in tmp:
+				tmp_elementcreator = np.array([])
+
+
+
+				for elem in table_lists:
+
+					tmp_elementcreator = np.append(tmp_elementcreator,elem)
+					# print(tmp_elementcreator)
+					
+
+				almost_final = np.append(almost_final,[tmp_elementcreator],axis=0)
+				print(almost_final)
+				
+
+			final_data = np.concatenate((final_data,almost_final))
+				
+
+
+		
+		pass
+			
+
+
 
 	#increment loop 
-	i+=1
+	i +=1
 
-	# print(receive_text.url)
-
-	# table = parse_single_table(receive_votables.text)
-
-	# data = table.array
-
-	# print(data)
 
 
 	#TODO: ANALYSIS OF ARRAYS AND RESULTS
