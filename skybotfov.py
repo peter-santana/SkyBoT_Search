@@ -87,7 +87,7 @@ df =  pd.read_excel(io=file_name)
 i = 1
 
 #Loop through all the excel file
-while i <= 3:
+while i <= 400:
 
 	#Grab date from excel file
 	date = datetime.strptime(df["DateandTime"][i], "%y:%m:%dT%H:%M:%S")
@@ -152,23 +152,26 @@ while i <= 3:
 					
 
 				almost_final = np.append(almost_final,[tmp_elementcreator],axis=0)
-				print(almost_final)
-				
+
 
 			final_data = np.concatenate((final_data,almost_final))
 				
-
-
-		
 		pass
-			
-
-
 
 	#increment loop 
 	i +=1
-
-
+a = np.where(final_data == b'NEA>Atira')
+b = np.where(final_data == b'NEA>Aten')
+c = np.where(final_data == b'NEA>Apollo')
+d = np.where(final_data == b'NEA>Amor')
+print(a)
+print(b)
+print(c)
+print(d)
+print(final_data[a[0]])
+print(final_data[b[0]])
+print(final_data[c[0]])
+print(final_data[d[0]])
 
 	#TODO: ANALYSIS OF ARRAYS AND RESULTS
 
