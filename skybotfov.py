@@ -10,71 +10,14 @@ from astropy.io.votable import parse
 from astropy.io.votable import parse_single_table, is_votable, validate
 import xml.etree.ElementTree as ET
 import numpy as np
+from scipy.interpolate import interp1d
 
-
-
-#USER MODE!!!! THE FIRST MODE HERE IS FOR USING THE PROGRAM WITH USER INPUT AND LOOPING
-#SKIP UNTIL LINE 74
-
-
-
-#EPOCH is the requested epoch, type "now" for now
-#RA is the right ascencion of the FOV center
-#DEC is the declination of the FOV center
-#TALL is how tall in degrees the FOV is
-#WIDE is how wide in degrees the FOV is
-#END is the END EPOCH, meaning until what date and time do you want results
-#MIN is the amount of time in minutes you want to update the timescale
-
-
-# if len(sys.argv) > 6:
-# 	EPOCH = sys.argv[1]
-# 	RA = sys.argv[2]
-# 	DEC = sys.argv[3]
-# 	TALL = sys.argv[4]
-# 	WIDE = sys.argv[5]
-# 	END = sys.argv[6]
-# 	MIN = sys.argv[7]
-# else:
-# 	print("missing parameter")
-# 	sys.exit()
-
-# #Turning degrees into arcsecs
-# TAll = TALL * 3600
-# WIDE = WIDE * 3600
-
-# #Turning EPOCH string into datetime format
-# date = datetime.strptime(EPOCH, "%Y-%m-%dT%H:%M:%S")
-
-# file = open("resp_text.txt", "w")
-
-# #Processing the data and recieving it
-# while date.isoformat() != END:
-
-# 	date = date + timedelta(minutes = int(MIN))
-
-# ploads = {"-ep":date.isoformat(), "-ra":RA, "-dec":DEC,"-mime":"text","radius":str(TALL)+"x"+str(WIDE),"objfilter":"100"}
-
-# 	receive = requests.get("http://vo.imcce.fr/webservices/skybot/skybotconesearch_query.php?",params=ploads)
-
-# 	print("EPOCH is: "+date.isoformat()+"\nRight Ascencion is: "+RA+"°"+"\nDeclination is: "+DEC+"°")
-# 	print(receive.text)
-
-# 	file.write(date.isoformat())
-# 	file.write(receive.text)
-# 	file.write("\n")
-
-
-
-# file.close()
 
 final_data = np.array([[1,2,3,4,5,6,7,8,9,10,11]])
 
+file = open("Objects_test.txt", "w")
 
-
-file = open("resp_text.txt", "w")
-
-
+#FOV dimensions to arcsecs
 TALL = 20 * 3600
 
 WIDE = 24 * 3600
@@ -84,34 +27,79 @@ file_name = "J2000 Coordinates - LCAM Center FOV Visibility Sheet.xlsx"
 
 df =  pd.read_excel(io=file_name)
 
-i = 1
+i = 0
 
-#Loop through all the excel file
-while i <= 400:
 
-	#Grab date from excel file
-	date = datetime.strptime(df["DateandTime"][i], "%y:%m:%dT%H:%M:%S")
+#grabbing data from excel sheet
 
-	#Turn RA from Hours and minutes to degrees
-	RA = float(df["RA (Hours)"][i]) + float(df["RA (Min)"][i])
+#Turning declination from degrees and minutes into just degrees 
+#Having them in an array
+Declination = df["DEC (Deg)"] + (df["DEC (Min)"] / 60)
 
-	#Turn DEC from degree and minutes to just degrees
-	DEC = float(df["DEC (Deg)"][i] + float(df["DEC (Min)"][i]))
+#Turning RA from hours and minutes into just degrees
+#having them in an array
+Right_Ascencion = (df["RA (Hours)"] * 15) + (df["RA (Min)"] / 60)
+
+#9648 is the total number of timestamps from selected dates (change this depending on the excel file)
+#In this case, its 200 days, measuring the FOV every 30 minutes, so 48 timeframes per day * 200 
+x = np.linspace(1,9601,len(Declination))
+
+#interpolating data for declination 
+dec_interp = interp1d(x, Declination)
+ra_interp = interp1d(x, Right_Ascencion)
+
+#generating array from 1 to 1960 to get the times in interpolation
+new_x = np.arange(1,9601)
+
+#Initial date 
+date = datetime.strptime(df["DateandTime"][0], "%y:%m:%dT%H:%M:%S")
+
+#establish the difference in times we want to see
+#in this case we want 30 minutes
+time_change = timedelta(minutes=30)
+
+#substract 30 minutes so date starts normally in the loop
+date = date - time_change
+
+#extend interpolation objects so that they are an array of 1960 time frames
+RA = ra_interp(new_x)
+DEC = dec_interp(new_x)
+
+
+
+#Loop through all wanted generated points
+while i < 9600:
+
+
+	#Adding the minutes to date
+	date = date + time_change
+
+	print(date)
 
 
 	#Load the parameters for the search query
-	ploads = {"-ep":date.isoformat(), "-ra":RA, "-dec":DEC,"-mime":"text","-radius":str(TALL)+"x"+str(WIDE),"-objFilter":"100","-output":"object"}
+	ploads = {"-ep":date.isoformat(), "-ra":RA[i], "-dec":DEC[i],"-mime":"text","-radius":str(TALL)+"x"+str(WIDE),"-objFilter":"100","-output":"object"}
 
 
 	#TEXT request for query, will write in a seperate text file all the objects
 	receive_text = requests.get("http://vo.imcce.fr/webservices/skybot/skybotconesearch_query.php?",params=ploads)
 
 	file.write(date.isoformat())
+	file.write(" RA: " + str(RA[i]))
+	file.write(" DEC: " + str(DEC[i]))
 	file.write(receive_text.text)
 	file.write("\n")
 
+	ploads_comets = {"-ep":date.isoformat(), "-ra":RA[i], "-dec":DEC[i],"-mime":"text","-radius":str(TALL)+"x"+str(WIDE),"-objFilter":"001","-output":"object"}
+
+	receive_text_comets = requests.get("http://vo.imcce.fr/webservices/skybot/skybotconesearch_query.php?",params=ploads)
+
+	file.write("Comets: " + "\n")
+	file.write(receive_text_comets.text)
+	file.write("\n")
+
 	#Same parameters but for the votable format(The one that lets you turn into array)
-	ploads_vot = {"-ep":date.isoformat(), "-ra":RA, "-dec":DEC,"-mime":"votable","-radius":str(TALL)+"x"+str(WIDE),"-objFilter":"100","-output":"object"}
+	ploads_vot = {"-ep":date.isoformat(), "-ra":RA[i], "-dec":DEC[i],"-mime":"votable","-radius":str(TALL)+"x"+str(WIDE),"-objFilter":"100","-output":"object"}
 
 	#Same request but for VOTABLES
 	receive_votables = requests.get("http://vo.imcce.fr/webservices/skybot/skybotconesearch_query.php?",params=ploads_vot)
@@ -119,22 +107,13 @@ while i <= 400:
 
 	#Turning into xml so parse from astropy can parse the data (idk why it works like that but it does lmao)
 	root = ET.fromstring(receive_votables.text)
-
 	tree = ET.ElementTree(root)
-
-	#TODO: Error exception for astropy to not read empty xml, looking at how to do that
 	tree.write("file.xml")
 
 	votable = parse("file.xml")
 
-
-
-
 	#Loop to get the tables and the data
 	for resource in votable.resources:
-
-
-
 
 		for table in resource.tables:
 			tmp = table.array
@@ -143,38 +122,92 @@ while i <= 400:
 			for table_lists in tmp:
 				tmp_elementcreator = np.array([])
 
-
-
 				for elem in table_lists:
 
 					tmp_elementcreator = np.append(tmp_elementcreator,elem)
 					# print(tmp_elementcreator)
 					
-
 				almost_final = np.append(almost_final,[tmp_elementcreator],axis=0)
-
 
 			final_data = np.concatenate((final_data,almost_final))
 				
 		pass
 
+
 	#increment loop 
 	i +=1
+
+file.close()
+
+
+#Specific data analysis for NEAs, etc
+
+
+nea_atira = open("NEA_Atira.txt","w")
+
 a = np.where(final_data == b'NEA>Atira')
+
+
+nea_atira.write("ATIRA NEA quantity: " + str(len(a[0])) + " (how many times we can actually see NEA asteroids)" + "\n")
+unique_atira = final_data[a[0]]
+nea_atira.write("ATIRA NEA Unique quantity: " +str(len(np.unique(unique_atira[:,1])))+ "\n")
+nea_atira.write("ATIRA NEAs: " + "\n" )
+np.savetxt(nea_atira, np.unique(unique_atira[:,1]), fmt='%s')
+nea_atira.write("\n" + "All NEA data: " + "\n")
+np.savetxt(nea_atira,final_data[a[0]],fmt='%s')
+nea_atira.close()
+
+
+nea_aten = open("NEA_Aten.txt","w")
+
 b = np.where(final_data == b'NEA>Aten')
+
+nea_aten.write("Aten NEA quantity: " + str(len(b[0])) + " (how many times we can actually see NEA asteroids)" + "\n")
+unique_aten = final_data[b[0]]
+nea_aten.write("Aten NEA Unique quantity: " +str(len(np.unique(unique_aten[:,1]))) + "\n")
+nea_aten.write("Aten NEAs: " + "\n")
+np.savetxt(nea_aten, np.unique(unique_aten[:,1]), fmt='%s')
+nea_aten.write("\n" + "All NEA data: " + "\n")
+np.savetxt(nea_aten,final_data[b[0]],fmt='%s')
+
+nea_aten.close()
+
+
+nea_apollo = open("NEA_Apollo.txt","w")
+
 c = np.where(final_data == b'NEA>Apollo')
+
+nea_apollo.write("Apollo NEA quantity: " + str(len(c[0])) + " (how many times we can actually see NEA asteroids)" + "\n")
+unique_apollo = final_data[c[0]]
+nea_apollo.write("Apollo NEA Unique quantity: " +str(len(np.unique(unique_apollo[:,1]))) + "\n")
+nea_apollo.write("Apollo NEAs: " + "\n")
+np.savetxt(nea_apollo,np.unique(unique_apollo[:,1]),fmt='%s')
+nea_apollo.write("\n" + "All NEA data: " + "\n")
+np.savetxt(nea_apollo,final_data[c[0]],fmt='%s')
+
+nea_apollo.close()
+
+nea_amor = open("NEA_Amor.txt","w")
+
 d = np.where(final_data == b'NEA>Amor')
-print(a)
-print(b)
-print(c)
-print(d)
-print(final_data[a[0]])
-print(final_data[b[0]])
-print(final_data[c[0]])
-print(final_data[d[0]])
 
-	#TODO: ANALYSIS OF ARRAYS AND RESULTS
+nea_amor.write("Amor NEA quantity: " + str(len(d[0])) + " (how many times we can actually see NEA asteroids)" + "\n")
+unique_amor = final_data[d[0]]
+nea_amor.write("Amor NEA Unique quantity: " +str(len(np.unique(unique_amor[:,1]))) + "\n")
+nea_amor.write("Amor NEAs: " + "\n")
+np.savetxt(nea_amor,np.unique(unique_amor[:,1]), fmt='%s')
+nea_amor.write("\n" + "All NEA data: " + "\n")
+np.savetxt(nea_amor,final_data[d[0]],fmt='%s')
 
+nea_amor.close()
+
+
+
+# TODO: data analysis 
+
+#how many MBI, MBII, etf…
+# how many NEA, PHA, etc…
+# how many comets …
 
 
 
