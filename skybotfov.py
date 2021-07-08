@@ -12,9 +12,10 @@ import xml.etree.ElementTree as ET
 import numpy as np
 from scipy.interpolate import interp1d
 
-
+#Number of columns for the data we recieve, numbers are honestly just placeholders
 final_data = np.array([[1,2,3,4,5,6,7,8,9,10,11]])
 
+#Change the name of the txt file to whatever you want
 file = open("Objects_test.txt", "w")
 
 #FOV dimensions to arcsecs
@@ -25,12 +26,11 @@ WIDE = 24 * 3600
 #Include path and name of the excel file
 file_name = "J2000 Coordinates - LCAM Center FOV Visibility Sheet.xlsx"
 
+#grabbing data from excel sheet
 df =  pd.read_excel(io=file_name)
 
-i = 0
 
 
-#grabbing data from excel sheet
 
 #Turning declination from degrees and minutes into just degrees 
 #Having them in an array
@@ -40,8 +40,9 @@ Declination = df["DEC (Deg)"] + (df["DEC (Min)"] / 60)
 #having them in an array
 Right_Ascencion = (df["RA (Hours)"] * 15) + (df["RA (Min)"] / 60)
 
-#9648 is the total number of timestamps from selected dates (change this depending on the excel file)
+#9600 is the total number of timestamps from selected dates (change this depending on the excel file)
 #In this case, its 200 days, measuring the FOV every 30 minutes, so 48 timeframes per day * 200 
+#CHANGE THIS TO WHATEVER YOU NEED FOR THE TIME CHANGE IN DAYS
 x = np.linspace(1,9601,len(Declination))
 
 #interpolating data for declination 
@@ -65,10 +66,10 @@ date = date - time_change
 RA = ra_interp(new_x)
 DEC = dec_interp(new_x)
 
-
+i = 0
 
 #Loop through all wanted generated points
-while i < 9600:
+while i < 10:
 
 
 	#Adding the minutes to date
@@ -200,6 +201,35 @@ nea_amor.write("\n" + "All NEA data: " + "\n")
 np.savetxt(nea_amor,final_data[d[0]],fmt='%s')
 
 nea_amor.close()
+
+magnitudes = final_data[2:,6].astype(float)
+
+magnitudes_less_than_7 = magnitudes < 7
+
+magnitudes_less_than_9 = magnitudes < 9
+
+magnitudes_less_than_10 = magnitudes < 10
+
+magnitudes_less_than_11 = magnitudes < 11
+
+magnitudes_less_than_12 = magnitudes < 12
+
+magnitude_analysis = open("Magnitudes_Analysis.txt" , "w")
+
+magnitude_analysis.write("Objects with Magnitude less than 7: "  + str(len(magnitudes_less_than_7)) + "\n")
+
+magnitude_analysis.write("Objects with Magnitude less than 9: "  + str(len(magnitudes_less_than_9)) + "\n")
+
+magnitude_analysis.write("Objects with Magnitude less than 10: "  + str(len(magnitudes_less_than_10)) + "\n")
+
+magnitude_analysis.write("Objects with Magnitude less than 11: "  + str(len(magnitudes_less_than_11)) + "\n")
+
+magnitude_analysis.write("Objects with Magnitude less than 12: "  + str(len(magnitudes_less_than_12)) + "\n")
+
+magnitude_analysis.close()
+
+
+
 
 
 
