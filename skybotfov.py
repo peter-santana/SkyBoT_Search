@@ -12,6 +12,7 @@ import xml.etree.ElementTree as ET
 import numpy as np
 from scipy.interpolate import interp1d
 
+
 #Number of columns for the data we recieve, numbers are honestly just placeholders
 final_data = np.array([[1,2,3,4,5,6,7,8,9,10,11]])
 
@@ -28,8 +29,6 @@ file_name = "J2000 Coordinates - LCAM Center FOV Visibility Sheet.xlsx"
 
 #grabbing data from excel sheet
 df =  pd.read_excel(io=file_name)
-
-
 
 
 #Turning declination from degrees and minutes into just degrees 
@@ -69,7 +68,7 @@ DEC = dec_interp(new_x)
 i = 0
 
 #Loop through all wanted generated points
-while i < 10:
+while i < 9600:
 
 
 	#Adding the minutes to date
@@ -91,13 +90,13 @@ while i < 10:
 	file.write(receive_text.text)
 	file.write("\n")
 
-	ploads_comets = {"-ep":date.isoformat(), "-ra":RA[i], "-dec":DEC[i],"-mime":"text","-radius":str(TALL)+"x"+str(WIDE),"-objFilter":"001","-output":"object"}
+	# ploads_comets = {"-ep":date.isoformat(), "-ra":RA[i], "-dec":DEC[i],"-mime":"text","-radius":str(TALL)+"x"+str(WIDE),"-objFilter":"001","-output":"object"}
 
-	receive_text_comets = requests.get("http://vo.imcce.fr/webservices/skybot/skybotconesearch_query.php?",params=ploads)
+	# receive_text_comets = requests.get("http://vo.imcce.fr/webservices/skybot/skybotconesearch_query.php?",params=ploads)
 
-	file.write("Comets: " + "\n")
-	file.write(receive_text_comets.text)
-	file.write("\n")
+	# file.write("Comets: " + "\n")
+	# file.write(receive_text_comets.text)
+	# file.write("\n")
 
 	#Same parameters but for the votable format(The one that lets you turn into array)
 	ploads_vot = {"-ep":date.isoformat(), "-ra":RA[i], "-dec":DEC[i],"-mime":"votable","-radius":str(TALL)+"x"+str(WIDE),"-objFilter":"100","-output":"object"}
@@ -202,42 +201,8 @@ np.savetxt(nea_amor,final_data[d[0]],fmt='%s')
 
 nea_amor.close()
 
-magnitudes = final_data[2:,6].astype(float)
-
-magnitudes_less_than_7 = magnitudes < 7
-
-magnitudes_less_than_9 = magnitudes < 9
-
-magnitudes_less_than_10 = magnitudes < 10
-
-magnitudes_less_than_11 = magnitudes < 11
-
-magnitudes_less_than_12 = magnitudes < 12
-
-magnitude_analysis = open("Magnitudes_Analysis.txt" , "w")
-
-magnitude_analysis.write("Objects with Magnitude less than 7: "  + str(len(magnitudes_less_than_7)) + "\n")
-
-magnitude_analysis.write("Objects with Magnitude less than 9: "  + str(len(magnitudes_less_than_9)) + "\n")
-
-magnitude_analysis.write("Objects with Magnitude less than 10: "  + str(len(magnitudes_less_than_10)) + "\n")
-
-magnitude_analysis.write("Objects with Magnitude less than 11: "  + str(len(magnitudes_less_than_11)) + "\n")
-
-magnitude_analysis.write("Objects with Magnitude less than 12: "  + str(len(magnitudes_less_than_12)) + "\n")
-
-magnitude_analysis.close()
 
 
-
-
-
-
-# TODO: data analysis 
-
-#how many MBI, MBII, etf…
-# how many NEA, PHA, etc…
-# how many comets …
 
 
 
