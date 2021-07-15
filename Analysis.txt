@@ -1,0 +1,90 @@
+Asteroid Analysis resulting from skybot script: 
+
+Total Asteroids found: 48790
+Asteroids with visual magnitude less than 6: 0
+Asteroids with visual magnitude less than 7: 0
+Asteroids with visual magnitude less than 8: 1
+Asteroids with visual magnitude less than 9: 1
+Asteroids with visual magnitude less than 10: 1
+Asteroids with visual magnitude less than 11: 1
+Asteroids with visual magnitude less than 12: 4
+Asteroids with visual magnitude less than 13: 5
+Asteroids with visual magnitude less than 14: 17
+Asteroids with visual magnitude less than 15: 40
+Asteroids with visual magnitude less than 16: 87
+Asteroids with visual magnitude less than 17: 227
+Asteroids with visual magnitude less than 18: 585
+Asteroids with visual magnitude less than 19: 1778
+Asteroids with visual magnitude less than 20: 4925
+Asteroids with visual magnitude less than 21: 12174
+Asteroids with visual magnitude less than 22: 24849
+Asteroids with visual magnitude less than 23: 39678
+Asteroids with visual magnitude less than 24: 47296
+Asteroids with visual magnitude less than 25: 48527
+Asteroids with visual magnitude less than 26: 48671
+Asteroids with visual magnitude less than 27: 48718
+Asteroids with visual magnitude less than 28: 48751
+Asteroids with visual magnitude less than 29: 48772
+Asteroids with visual magnitude less than 30: 48778
+
+The average magnitude for all asteroids is: 21.763474072555848
+
+There are 45880 main belt asteroids
+
+Over 44 comets can be seen, these are: 
+138P
+157P
+162P
+185P
+200P
+205P C
+208P
+250P
+253P
+264P
+266P
+303P
+327P
+335P
+337P
+40P
+41P
+54P
+56P
+59P
+64P
+C/1997 A1
+C/2000 O1
+C/2002 K4
+C/2002 T7
+C/2009 UG89
+C/2010 B1
+C/2012 F3
+C/2013 G8
+C/2013 X1
+C/2014 R1
+C/2014 W8
+C/2015 J2
+C/2016 VZ18
+C/2017 E1
+C/2017 G3
+P/2006 F4
+P/2007 V1
+P/2010 C1
+P/2011 N1
+P/2011 UA134
+P/2015 X6
+P/2016 J1-A
+P/2016 J1-B
+
+There are 448 Near earth asteroids
+The average magnitude of these NEA's is: 24.00284210526316
+
+There are 1296 Hungaria type asteroids
+The average magnitude of Hungaria type asteroids is: 22.343615775087855
+
+382 Trojan Asteroids can be seen
+The average magnitude of the Trojan Asteroids that can be seen is: 21.456687242798356
+
+672 Mars-crosser asteroids can be seen
+The average magnitude of Mars-crosser asteroids that can be seen is: 22.448567791215783
