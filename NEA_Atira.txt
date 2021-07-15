@@ -1,0 +1,24 @@
+ATIRA NEA quantity: 15 (how many times we can actually see NEA asteroids)
+ATIRA NEA Unique quantity: 4
+ATIRA NEAs: 
+b'2006 WE4'
+b'2008 EA32'
+b'2013 JX28'
+b'2017 YH'
+
+All NEA data: 
+b'-' b'2013 JX28' b'00 02 31.5906' b'-04 01 14.164' b'NEA>Atira' b'20.6' b'10.185' b'796.115' b'0.6316276271312856' b'-4.020601110066531' b'http://vizier.u-strasbg.fr/cgi-bin/VizieR-5?-source=B/astorb/astorb&Name===2013+JX28'
+b'-' b'2013 JX28' b'00 02 40.9557' b'-04 00 3.014' b'NEA>Atira' b'20.6' b'10.185' b'703.954' b'0.6706487378599226' b'-4.000837354912265' b'http://vizier.u-strasbg.fr/cgi-bin/VizieR-5?-source=B/astorb/astorb&Name===2013+JX28'
+b'-' b'2017 YH' b'03 02 21.5675' b'+09 19 59.999' b'NEA>Atira' b'19.0' b'13.424' b'811.268' b'45.58986460009123' b'9.333333117167578' b'http://vizier.u-strasbg.fr/cgi-bin/VizieR-5?-source=B/astorb/astorb&Name===2017+YH'
+b'-' b'2017 YH' b'03 02 27.7555' b'+09 20 19.262' b'NEA>Atira' b'19.0' b'13.424' b'628.483' b'45.615647900261436' b'9.338683794691217' b'http://vizier.u-strasbg.fr/cgi-bin/VizieR-5?-source=B/astorb/astorb&Name===2017+YH'
+b'-' b'2017 YH' b'03 02 33.9419' b'+09 20 38.519' b'NEA>Atira' b'19.0' b'13.424' b'445.724' b'45.64142476726152' b'9.344033143525733' b'http://vizier.u-strasbg.fr/cgi-bin/VizieR-5?-source=B/astorb/astorb&Name===2017+YH'
+b'-' b'2017 YH' b'03 02 40.1268' b'+09 20 57.772' b'NEA>Atira' b'19.0' b'13.424' b'263.044' b'45.6671952033833' b'9.349381161379295' b'http://vizier.u-strasbg.fr/cgi-bin/VizieR-5?-source=B/astorb/astorb&Name===2017+YH'
+b'-' b'2017 YH' b'03 02 46.3102' b'+09 21 17.020' b'NEA>Atira' b'19.0' b'13.424' b'80.979' b'45.69295921378341' b'9.354727845960058' b'http://vizier.u-strasbg.fr/cgi-bin/VizieR-5?-source=B/astorb/astorb&Name===2017+YH'
+b'-' b'2017 YH' b'03 02 52.4920' b'+09 21 36.264' b'NEA>Atira' b'19.0' b'13.424' b'103.763' b'45.71871680419142' b'9.360073195549164' b'http://vizier.u-strasbg.fr/cgi-bin/VizieR-5?-source=B/astorb/astorb&Name===2017+YH'
+b'-' b'2017 YH' b'03 02 58.6723' b'+09 21 55.502' b'NEA>Atira' b'19.0' b'13.424' b'286.042' b'45.74446797747214' b'9.365417207281823' b'http://vizier.u-strasbg.fr/cgi-bin/VizieR-5?-source=B/astorb/astorb&Name===2017+YH'
+b'-' b'2017 YH' b'03 03 4.8511' b'+09 22 14.736' b'NEA>Atira' b'19.0' b'13.424' b'468.742' b'45.770212738782156' b'9.370759880585062' b'http://vizier.u-strasbg.fr/cgi-bin/VizieR-5?-source=B/astorb/astorb&Name===2017+YH'
+b'-' b'2017 YH' b'03 03 11.0283' b'+09 22 33.964' b'NEA>Atira' b'19.0' b'13.424' b'651.51' b'45.79595109385108' b'9.376101212594106' b'http://vizier.u-strasbg.fr/cgi-bin/VizieR-5?-source=B/astorb/astorb&Name===2017+YH'
+b'-' b'2017 YH' b'03 03 17.2039' b'+09 22 53.188' b'NEA>Atira' b'19.0' b'13.424' b'834.302' b'45.82168304554368' b'9.381441201590082' b'http://vizier.u-strasbg.fr/cgi-bin/VizieR-5?-source=B/astorb/astorb&Name===2017+YH'
+b'418265' b'2008 EA32' b'04 29 22.1408' b'+12 28 29.510' b'NEA>Atira' b'17.7' b'0.44' b'811.781' b'67.34225323886446' b'12.474863773767053' b'http://vizier.u-strasbg.fr/cgi-bin/VizieR-5?-source=B/astorb/astorb&Name===2008+EA32'
+b'-' b'2006 WE4' b'07 51 20.7521' b'+09 58 23.279' b'NEA>Atira' b'20.8' b'1.621' b'765.577' b'117.83646716858455' b'9.973132947328017' b'http://vizier.u-strasbg.fr/cgi-bin/VizieR-5?-source=B/astorb/astorb&Name===2006+WE4'
+b'-' b'2006 WE4' b'11 09 23.2060' b'-06 40 14.160' b'NEA>Atira' b'21.0' b'1.717' b'404.243' b'167.34669167279213' b'-6.670599885778927' b'http://vizier.u-strasbg.fr/cgi-bin/VizieR-5?-source=B/astorb/astorb&Name===2006+WE4'
