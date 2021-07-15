@@ -31,10 +31,10 @@
     <img src="https://github.com/peter-santana/SkyBoT_Search/blob/main/rsc/seti_logo_starfield_560px.jpg" alt="Logo" width="150" height="80">
   </a>
 
-  <h3 align="center">project_title</h3>
+  <h3 align="center">SkyBotSearchQueryPythonTool</h3>
 
   <p align="center">
-    project_description
+    SkybotSearchQuery script and analysis made as part of REU Program for SETI 2021. 
     <br />
     <a href="https://github.com/peter-santana/SkyBoT_Search"><strong>Explore the docs »</strong></a>
     <br />
@@ -102,51 +102,13 @@ To get a local copy up and running follow these simple steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
-
-### Installation
-
-1. Clone the repo
-   ```sh
-   git clone https://github.com/github_username/repo_name.git
-   ```
-2. Install NPM packages
-   ```sh
-   npm install
-   ```
-
+An excel sheet with RA/DEC's and Dates, Code can interpolate RA/DEC vs time and such but if not needed, comment that part out.
 
 
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-
-
-<!-- ROADMAP -->
-## Roadmap
-
-See the [open issues](https://github.com/github_username/repo_name/issues) for a list of proposed features (and known issues).
-
-
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+We used this code as part of an analysis of possible targets in the FOV of a telescope sensor during the year 2024. 
 
 
 
@@ -169,9 +131,7 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
 
-* []()
-* []()
-* []()
+THE SKYBOT API FOR MAKING THIS SCRIPT AND PROJECT POSSIBLE
 
 
 
