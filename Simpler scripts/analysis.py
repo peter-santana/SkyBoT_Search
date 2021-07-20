@@ -1,4 +1,5 @@
 #MBA and Asteroid Analysis
+#Comments are done so for magnitudes less than 18 (LCAM Project standards)
 
 import numpy as np
 
@@ -25,6 +26,12 @@ All_magnitudes = Magnitudes
 
 Magnitudes = Magnitudes[ind]
 
+Magnitudes_indices = np.where(All_magnitudes < 18)
+
+#Limiting our results for only magnitudes less than 18
+#DELETE THIS LINE IF U WANT FULL RESULTS DISREGARDING MAGNITUDES FOR OBJECTS
+Class = Class[Magnitudes_indices]
+
 
 Less_than_6 = Magnitudes[Magnitudes < 6]
 Less_than_7 = Magnitudes[Magnitudes < 7]
@@ -39,18 +46,18 @@ Less_than_15 = Magnitudes[Magnitudes < 15]
 Less_than_16 = Magnitudes[Magnitudes < 16]
 Less_than_17 = Magnitudes[Magnitudes < 17]
 Less_than_18 = Magnitudes[Magnitudes < 18]
-Less_than_19 = Magnitudes[Magnitudes < 19]
-Less_than_20 = Magnitudes[Magnitudes < 20]
-Less_than_21 = Magnitudes[Magnitudes < 21]
-Less_than_22 = Magnitudes[Magnitudes < 22]
-Less_than_23 = Magnitudes[Magnitudes < 23]
-Less_than_24 = Magnitudes[Magnitudes < 24]
-Less_than_25 = Magnitudes[Magnitudes < 25]
-Less_than_26 = Magnitudes[Magnitudes < 26]
-Less_than_27 = Magnitudes[Magnitudes < 27]
-Less_than_28 = Magnitudes[Magnitudes < 28]
-Less_than_29 = Magnitudes[Magnitudes < 29]
-Less_than_30 = Magnitudes[Magnitudes < 30]
+# Less_than_19 = Magnitudes[Magnitudes < 19]
+# Less_than_20 = Magnitudes[Magnitudes < 20]
+# Less_than_21 = Magnitudes[Magnitudes < 21]
+# Less_than_22 = Magnitudes[Magnitudes < 22]
+# Less_than_23 = Magnitudes[Magnitudes < 23]
+# Less_than_24 = Magnitudes[Magnitudes < 24]
+# Less_than_25 = Magnitudes[Magnitudes < 25]
+# Less_than_26 = Magnitudes[Magnitudes < 26]
+# Less_than_27 = Magnitudes[Magnitudes < 27]
+# Less_than_28 = Magnitudes[Magnitudes < 28]
+# Less_than_29 = Magnitudes[Magnitudes < 29]
+# Less_than_30 = Magnitudes[Magnitudes < 30]
 
 file.write("Asteroids with visual magnitude less than 6: " + str(Less_than_6.shape[0]) + "\n")
 file.write("Asteroids with visual magnitude less than 7: " + str(Less_than_7.shape[0]) + "\n")
@@ -65,18 +72,18 @@ file.write("Asteroids with visual magnitude less than 15: " + str(Less_than_15.s
 file.write("Asteroids with visual magnitude less than 16: " + str(Less_than_16.shape[0]) + "\n")
 file.write("Asteroids with visual magnitude less than 17: " + str(Less_than_17.shape[0]) + "\n")
 file.write("Asteroids with visual magnitude less than 18: " + str(Less_than_18.shape[0]) + "\n")
-file.write("Asteroids with visual magnitude less than 19: " + str(Less_than_19.shape[0]) + "\n")
-file.write("Asteroids with visual magnitude less than 20: " + str(Less_than_20.shape[0]) + "\n")
-file.write("Asteroids with visual magnitude less than 21: " + str(Less_than_21.shape[0]) + "\n")
-file.write("Asteroids with visual magnitude less than 22: " + str(Less_than_22.shape[0]) + "\n")
-file.write("Asteroids with visual magnitude less than 23: " + str(Less_than_23.shape[0]) + "\n")
-file.write("Asteroids with visual magnitude less than 24: " + str(Less_than_24.shape[0]) + "\n")
-file.write("Asteroids with visual magnitude less than 25: " + str(Less_than_25.shape[0]) + "\n")
-file.write("Asteroids with visual magnitude less than 26: " + str(Less_than_26.shape[0]) + "\n")
-file.write("Asteroids with visual magnitude less than 27: " + str(Less_than_27.shape[0]) + "\n")
-file.write("Asteroids with visual magnitude less than 28: " + str(Less_than_28.shape[0]) + "\n")
-file.write("Asteroids with visual magnitude less than 29: " + str(Less_than_29.shape[0]) + "\n")
-file.write("Asteroids with visual magnitude less than 30: " + str(Less_than_30.shape[0]) + "\n")
+# file.write("Asteroids with visual magnitude less than 19: " + str(Less_than_19.shape[0]) + "\n")
+# file.write("Asteroids with visual magnitude less than 20: " + str(Less_than_20.shape[0]) + "\n")
+# file.write("Asteroids with visual magnitude less than 21: " + str(Less_than_21.shape[0]) + "\n")
+# file.write("Asteroids with visual magnitude less than 22: " + str(Less_than_22.shape[0]) + "\n")
+# file.write("Asteroids with visual magnitude less than 23: " + str(Less_than_23.shape[0]) + "\n")
+# file.write("Asteroids with visual magnitude less than 24: " + str(Less_than_24.shape[0]) + "\n")
+# file.write("Asteroids with visual magnitude less than 25: " + str(Less_than_25.shape[0]) + "\n")
+# file.write("Asteroids with visual magnitude less than 26: " + str(Less_than_26.shape[0]) + "\n")
+# file.write("Asteroids with visual magnitude less than 27: " + str(Less_than_27.shape[0]) + "\n")
+# file.write("Asteroids with visual magnitude less than 28: " + str(Less_than_28.shape[0]) + "\n")
+# file.write("Asteroids with visual magnitude less than 29: " + str(Less_than_29.shape[0]) + "\n")
+# file.write("Asteroids with visual magnitude less than 30: " + str(Less_than_30.shape[0]) + "\n")
 
 file.write("\n" + "The average magnitude for all asteroids is: " + str(np.average(Magnitudes)) + "\n")
 
