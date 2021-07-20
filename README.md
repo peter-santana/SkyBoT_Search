@@ -88,7 +88,7 @@ Project Link: [https://github.com/peter-santana/SkyBoT_Search](https://github.co
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
 
-THE SKYBOT API FOR MAKING THIS SCRIPT AND PROJECT POSSIBLE
+This research has made use of IMCCE's SkyBoT VO tool
 https://vo.imcce.fr/webservices/skybot/
 
 
