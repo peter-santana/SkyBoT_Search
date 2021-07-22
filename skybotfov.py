@@ -11,11 +11,11 @@ from scipy.interpolate import interp1d
 
 
 #Change the name of the txt file to whatever you want
-file = open("Objects_test.txt", "w")
+file = open("Results/Objects_test.txt", "w")
 
-astr_file = open("Objects_test_asteroids.txt", "w")
+astr_file = open("Results/Objects_test_asteroids.txt", "w")
 
-comets_file = open("Objects_commets.txt", "w")
+comets_file = open("Results/Objects_commets.txt", "w")
 
 #FOV dimensions to arcsecs
 TALL = 20 * 3600
@@ -107,13 +107,13 @@ comets_file.close()
 
 #General Analysis
 
-file = open("Analysis.txt", "w")
+file = open("Results/Analysis.txt", "w")
 
-Asteroids = np.genfromtxt("Objects_test_asteroids.txt" , comments='#', delimiter = " | ",dtype=None,invalid_raise=False,usecols=(1), encoding=None)
+Asteroids = np.genfromtxt("Results/Objects_test_asteroids.txt", comments='#', delimiter =" | ", dtype=None, invalid_raise=False, usecols=(1), encoding=None)
 
-Class = np.genfromtxt("Objects_test_asteroids.txt" , comments='#', delimiter = " | ",dtype=None,invalid_raise=False,usecols=(4), encoding=None)
+Class = np.genfromtxt("Results/Objects_test_asteroids.txt", comments='#', delimiter =" | ", dtype=None, invalid_raise=False, usecols=(4), encoding=None)
 
-Magnitudes = np.genfromtxt("Objects_test_asteroids.txt" , comments='#', delimiter = " | ",dtype=None,invalid_raise=False,usecols=(5), encoding=None)
+Magnitudes = np.genfromtxt("Results/Objects_test_asteroids.txt", comments='#', delimiter =" | ", dtype=None, invalid_raise=False, usecols=(5), encoding=None)
 
 Unique_Asteroids , ind = np.unique(Asteroids, return_index = True)
 
@@ -189,7 +189,7 @@ Main_Belt_Asteroids = np.unique(Main_Belt_ocurrences)
 
 file.write("\n" + "There are " + str(Main_Belt_Asteroids.shape[0]) + " main belt asteroids" + "\n")
 
-Comets = np.genfromtxt("Objects_commets.txt" , comments="#", delimiter = " | ",dtype=None,invalid_raise=False,usecols=(1), encoding=None)
+Comets = np.genfromtxt("Results/Objects_commets.txt", comments="#", delimiter =" | ", dtype=None, invalid_raise=False, usecols=(1), encoding=None)
 
 Comets = np.unique(Comets)
 
@@ -245,7 +245,7 @@ file.close()
 
 
 
-nea_atira = open("NEA_Atira.txt","w")
+nea_atira = open("Results/NEA_Atira.txt", "w")
 
 Nea_atira_indexer = np.char.count(Class, "NEA>Atira") != 0
 
@@ -261,7 +261,7 @@ np.savetxt(nea_atira,Nea_atira_ocurrences,fmt='%s')
 nea_atira.close()
 
 
-nea_aten = open("NEA_Aten.txt","w")
+nea_aten = open("Results/NEA_Aten.txt", "w")
 
 Nea_aten_indexer = np.char.count(Class, "NEA>Aten") != 0
 
@@ -277,7 +277,7 @@ np.savetxt(nea_aten, Nea_aten_ocurrences, fmt='%s')
 nea_aten.close()
 
 
-nea_apollo = open("NEA_Apollo.txt","w")
+nea_apollo = open("Results/NEA_Apollo.txt", "w")
 
 Nea_apollo_indexer = np.char.count(Class, "NEA>Apollo") != 0
 
@@ -294,7 +294,7 @@ nea_apollo.close()
 
 
 
-nea_amor = open("NEA_Amor.txt","w")
+nea_amor = open("Results/NEA_Amor.txt", "w")
 Nea_amor_indexer = np.char.count(Class, "NEA>Amor") != 0
 
 Nea_amor_ocurrences = Asteroids[Nea_amor_indexer]
