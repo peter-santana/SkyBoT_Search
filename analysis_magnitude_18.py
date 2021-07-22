@@ -122,6 +122,10 @@ main_belt_magnitudes = Magnitudes[Main_Belt_indexer]
 
 main_belt_magnitudes_and_name = np.stack([Main_Belt_Asteroids, main_belt_magnitudes], axis=1)
 
+main_belt_magnitudes_and_name = sorted(main_belt_magnitudes_and_name, key = lambda x: x[1])
+
+print(main_belt_magnitudes_and_name)
+
 np.savetxt("Main_belt_asteroids.txt", main_belt_magnitudes_and_name, fmt="%s")
 
 
