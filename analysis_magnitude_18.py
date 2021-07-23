@@ -7,13 +7,13 @@ import sys
 
 
 
-file = open("Results/Analysis.txt", "w")
+file = open("Analysis.txt", "w")
 
-Asteroids = np.genfromtxt("Results/Objects_test_asteroids.txt", comments='#', delimiter =" | ", dtype=None, invalid_raise=False, usecols=(1), encoding=None)
+Asteroids = np.genfromtxt("Objects_test_asteroids.txt" , comments='#', delimiter = " | ",dtype=None,invalid_raise=False,usecols=(1), encoding=None)
 
-Class = np.genfromtxt("Results/Objects_test_asteroids.txt", comments='#', delimiter =" | ", dtype=None, invalid_raise=False, usecols=(4), encoding=None)
+Class = np.genfromtxt("Objects_test_asteroids.txt" , comments='#', delimiter = " | ",dtype=None,invalid_raise=False,usecols=(4), encoding=None)
 
-Magnitudes = np.genfromtxt("Results/Objects_test_asteroids.txt", comments='#', delimiter =" | ", dtype=None, invalid_raise=False, usecols=(5), encoding=None)
+Magnitudes = np.genfromtxt("Objects_test_asteroids.txt" , comments='#', delimiter = " | ",dtype=None,invalid_raise=False,usecols=(5), encoding=None)
 
 Unique_Asteroids , ind = np.unique(Asteroids, return_index = True)
 
@@ -129,7 +129,7 @@ print(main_belt_magnitudes_and_name)
 np.savetxt("Main_belt_asteroids.txt", main_belt_magnitudes_and_name, fmt="%s")
 
 
-Comets = np.genfromtxt("Results/Objects_commets.txt", comments="#", delimiter =" | ", dtype=None, invalid_raise=False, usecols=(1), encoding=None)
+Comets = np.genfromtxt("Objects_commets.txt" , comments="#", delimiter = " | ",dtype=None,invalid_raise=False,usecols=(1), encoding=None)
 
 Comets = np.unique(Comets)
 
